@@ -1,0 +1,32 @@
+{
+  "name": "minerucab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix client",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michialleb/MinerUcab.git"
+  },
+  "author": "michialleb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michialleb/MinerUcab/issues"
+  },
+  "homepage": "https://github.com/michialleb/MinerUcab#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "create-react-app": "^3.0.1",
+    "express": "^4.17.0",
+    "pg": "^7.11.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.19.0"
+  }
+}
