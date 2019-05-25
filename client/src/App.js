@@ -6,13 +6,14 @@ const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
 
+// coloca en formValid falso si hay agun error
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
-  // validate form errors being empty
+  // Valida si las "formErrors " tienen algo escrito, si es asi,entonces cambia el a valid false
   Object.values(formErrors).forEach(val => {
     val.length > 0 && (valid = false);
   });
-  // validate the form was filled out
+  // Valida que no hayan espacios vacios
   Object.values(rest).forEach(val => {
     val === null && (valid = false);
   });
@@ -21,6 +22,7 @@ const formValid = ({ formErrors, ...rest }) => {
 };
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +30,7 @@ class App extends Component {
       lastName: null,
       email: null,
       password: null,
+      //  en formErrors se escriben los errores segun sea el caso
       formErrors: {
         firstName: "",
         lastName: "",
@@ -37,11 +40,12 @@ class App extends Component {
     };
   }
 
-  // Sirve para que no se vean los datos ingresados en el link
+  
   handleSubmit = e => {
+    // Sirve para que no se vean los datos ingresados en el link
     e.preventDefault();
 
-    //Muestra por pantalla los datos si no hay error
+    //Muestra por consola los datos si no hay error
     if (formValid(this.state)) {
       console.log(`
         --SUBMITTING--
@@ -57,7 +61,9 @@ class App extends Component {
 
   handleChange = e => {
     e.preventDefault();
+    //Se guarda el tipo name de las etiquetas y su valor( firstName=Michelle)
     const { name, value } = e.target;
+    // Se copia los atributos del formErrors
     let formErrors = { ...this.state.formErrors };
     // se validan los datos insertados
     switch (name) {
@@ -81,6 +87,7 @@ class App extends Component {
       default:
         break;
     }
+    // Se modifican los valores del formErrors (los del constructor)
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
 
@@ -102,6 +109,7 @@ class App extends Component {
                 noValidate
                 onChange={this.handleChange}
               />
+
               {formErrors.firstName.length > 0 && (
                 <span className="errorMessage">{formErrors.firstName}</span>
               )}
